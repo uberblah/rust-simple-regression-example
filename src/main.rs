@@ -34,7 +34,7 @@ fn main() {
     let data = (1..data_n)
         .map(|x: u64| ((x as f64) / (data_n as f64)) * x_scale)
         .map(move |x: f64| (x, data_func(x)))
-        .collect::<Vec<(f64,f64,)>>();
+        .collect::<Vec<(f64, f64)>>();
 
     let mut hy = quad(0.0, 0.0, 0.0);
     let mut e = mse(hy.clone(), &data);
@@ -42,10 +42,10 @@ fn main() {
         let ne = mse(hy.clone(), &data);
         if ne > e || (e == ne && i != 0) {
             // if we've converged, stop regressing
-            break
+            break;
         }
 
-        let dir = if ne > e {"+"} else {"-"};
+        let dir = if ne > e { "+" } else { "-" };
         println!("{} {} MSE {}", dir, i, ne);
         e = ne;
 
